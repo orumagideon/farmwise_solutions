@@ -1,0 +1,20 @@
+/* src/components/ProduceList.css */
+.produce-list {
+    margin-top: 20px;
+  }
+  
+  .produce-item {
+    background-color: white;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .produce-item h3 {
+    margin: 0;
+  }
+  
+  .produce-item p {
+    margin: 5px 0;
+  }
