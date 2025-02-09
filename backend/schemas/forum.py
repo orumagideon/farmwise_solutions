@@ -1,9 +1,11 @@
+# schemas/forum.py
 from pydantic import BaseModel
 from datetime import datetime
 
 # Schema for creating a forum post
 class ForumPostCreate(BaseModel):
     content: str
+    user_id: int
 
 # Schema for returning a forum post
 class ForumPostOut(BaseModel):

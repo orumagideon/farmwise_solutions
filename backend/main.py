@@ -1,13 +1,12 @@
 # main.py
-from fastapi import FastAPI, Depends, HTTPException, status
-from sqlalchemy.orm import Session
-from db.session import SessionLocal
-from db.models.user import User
-from schemas.user import UserCreate, UserOut
-from core.security import get_password_hash
+from fastapi import FastAPI
 from core.config import settings
-from db.base import Base  # Import Base here
-from db.session import engine  # Import engine here
+from db.base import Base
+from db.session import engine
+from routes.user import router as user_router
+from routes.produce import router as produce_router
+from routes.forum import router as forum_router
+from routes.equipment import router as equipment_router
 
 # Function to create database tables
 def create_tables():
@@ -22,26 +21,11 @@ def start_application():
 # Create the FastAPI app
 app = start_application()
 
-# Dependency to get the database session
-def get_db():
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
-
-# Route for user registration
-@app.post("/users/", response_model=UserOut, status_code=status.HTTP_201_CREATED)
-def create_user(user: UserCreate, db: Session = Depends(get_db)):
-    # Hash the password
-    hashed_password = get_password_hash(user.password)
-    # Create a new user instance
-    db_user = User(username=user.username, email=user.email, password_hash=hashed_password)
-    # Add the user to the database
-    db.add(db_user)
-    db.commit()
-    db.refresh(db_user)
-    return db_user
+# Include routers
+app.include_router(user_router, prefix="/api")
+app.include_router(produce_router, prefix="/api")
+app.include_router(forum_router, prefix="/api")
+app.include_router(equipment_router, prefix="/api")
 
 # Route for the home page
 @app.get("/")
