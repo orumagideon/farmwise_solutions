@@ -1,0 +1,25 @@
+/* src/pages/Equipment.css */
+.equipment-page {
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .equipment-list {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .equipment-item {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    text-align: left;
+  }
+  
+  .equipment-item h3 {
+    color: #333;
+    margin-bottom: 8px;
+  }
+  

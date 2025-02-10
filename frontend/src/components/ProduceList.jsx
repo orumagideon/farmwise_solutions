@@ -1,4 +1,3 @@
-// src/components/ProduceList.jsx
 import React, { useEffect, useState } from "react";
 import { getProduce } from "../api";
 import "./ProduceList.css";
@@ -8,8 +7,12 @@ const ProduceList = () => {
 
   useEffect(() => {
     const fetchProduce = async () => {
-      const data = await getProduce();
-      setProduce(data);
+      try {
+        const data = await getProduce();
+        setProduce(data);
+      } catch (error) {
+        console.error("Error fetching produce list:", error);
+      }
     };
     fetchProduce();
   }, []);

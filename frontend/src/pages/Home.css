@@ -1,0 +1,10 @@
+/* src/pages/Home.css */
+.home-page {
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .home-page h1 {
+    font-size: 2rem;
+  }
+  
