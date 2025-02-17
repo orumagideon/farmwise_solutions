@@ -8,9 +8,15 @@ class ForumPostCreate(BaseModel):
     content: str
     user_id: int
 
+    class Config:
+        from_attributes = True  # Updated to comply with Pydantic V2
+
 # Schema for updating a forum post
 class ForumPostUpdate(BaseModel):
     content: Optional[str] = None
+
+    class Config:
+        from_attributes = True  # Updated to comply with Pydantic V2
 
 # Schema for creating a forum reply
 class ForumReplyCreate(BaseModel):
@@ -18,7 +24,10 @@ class ForumReplyCreate(BaseModel):
     user_id: int
     content: str
 
-# Schema for returning a reply
+    class Config:
+        from_attributes = True  # Updated to comply with Pydantic V2
+
+# Schema for returning a forum reply
 class ForumReplyOut(BaseModel):
     id: int
     post_id: int
@@ -27,7 +36,7 @@ class ForumReplyOut(BaseModel):
     created_at: datetime
 
     class Config:
-        from_attributes = True  # Enables ORM mode
+        from_attributes = True  # Updated to comply with Pydantic V2
 
 # Schema for returning a forum post
 class ForumPostOut(BaseModel):
@@ -40,4 +49,4 @@ class ForumPostOut(BaseModel):
     replies: List[ForumReplyOut] = []
 
     class Config:
-        from_attributes = True  # Enables ORM mode
+        from_attributes = True  # Updated to comply with Pydantic V2

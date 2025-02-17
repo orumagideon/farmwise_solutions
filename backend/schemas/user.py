@@ -1,24 +1,29 @@
 # schemas/user.py
-from pydantic import BaseModel, EmailStr
-from datetime import datetime
+from pydantic import BaseModel
+from typing import Optional
 
-# Schema for user registration
+# Schema for creating a user
 class UserCreate(BaseModel):
     username: str
-    email: EmailStr
+    email: str
     password: str
 
-# Schema for user login
-class UserLogin(BaseModel):
-    email: EmailStr
-    password: str
+    class Config:
+        from_attributes = True  # Updated to comply with Pydantic V2
 
-# Schema for returning user details
+# Schema for returning user information
 class UserOut(BaseModel):
     id: int
     username: str
-    email: EmailStr
-    created_at: datetime
+    email: str
 
     class Config:
-        from_attributes = True  # Enables ORM mode
+        from_attributes = True  # Updated to comply with Pydantic V2
+
+# Schema for user login (authentication)
+class UserLogin(BaseModel):
+    username: str
+    password: str
+
+    class Config:
+        from_attributes = True  # Updated to comply with Pydantic V2

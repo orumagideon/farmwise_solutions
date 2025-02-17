@@ -10,6 +10,12 @@ router = APIRouter()
 
 # Dependency to get the database session
 def get_db():
+    """
+    Dependency that provides a database session to interact with the database.
+
+    This function is used in the route handlers to get access to the DB session,
+    ensuring that the session is properly closed after use.
+    """
     db = SessionLocal()
     try:
         yield db
@@ -23,6 +29,17 @@ def create_forum_post(
     image: UploadFile = File(None), 
     db: Session = Depends(get_db)
 ):
+    """
+    Create a new forum post. Optionally, an image can be uploaded with the post.
+
+    Args:
+        post (ForumPostCreate): Data for the new post.
+        image (UploadFile, optional): An optional image to be uploaded.
+        db (Session): The database session.
+
+    Returns:
+        ForumPostOut: The created forum post.
+    """
     image_data = image.file.read() if image else None
 
     db_post = ForumPost(
@@ -38,11 +55,30 @@ def create_forum_post(
 # Route to get all forum posts with replies
 @router.get("/forum/", response_model=List[ForumPostOut])
 def get_all_forum_posts(db: Session = Depends(get_db)):
+    """
+    Retrieve all forum posts.
+
+    Args:
+        db (Session): The database session.
+
+    Returns:
+        List[ForumPostOut]: A list of all forum posts.
+    """
     return db.query(ForumPost).all()
 
 # Route to get a single forum post by ID
 @router.get("/forum/{post_id}", response_model=ForumPostOut)
 def get_forum_post(post_id: int, db: Session = Depends(get_db)):
+    """
+    Retrieve a single forum post by its ID.
+
+    Args:
+        post_id (int): The ID of the post.
+        db (Session): The database session.
+
+    Returns:
+        ForumPostOut: The requested forum post.
+    """
     post = db.query(ForumPost).filter(ForumPost.id == post_id).first()
     if not post:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Post not found")
@@ -51,6 +87,17 @@ def get_forum_post(post_id: int, db: Session = Depends(get_db)):
 # Route to reply to a forum post
 @router.post("/forum/{post_id}/reply", response_model=ForumReplyOut)
 def reply_to_forum_post(post_id: int, reply: ForumReplyCreate, db: Session = Depends(get_db)):
+    """
+    Reply to a specific forum post.
+
+    Args:
+        post_id (int): The ID of the post to reply to.
+        reply (ForumReplyCreate): Data for the reply.
+        db (Session): The database session.
+
+    Returns:
+        ForumReplyOut: The created reply.
+    """
     post = db.query(ForumPost).filter(ForumPost.id == post_id).first()
     if not post:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Post not found")
@@ -68,6 +115,17 @@ def reply_to_forum_post(post_id: int, reply: ForumReplyCreate, db: Session = Dep
 # Route to update a forum post
 @router.put("/forum/{post_id}", response_model=ForumPostOut)
 def update_forum_post(post_id: int, post_update: ForumPostUpdate, db: Session = Depends(get_db)):
+    """
+    Update an existing forum post.
+
+    Args:
+        post_id (int): The ID of the post to update.
+        post_update (ForumPostUpdate): Data for updating the post.
+        db (Session): The database session.
+
+    Returns:
+        ForumPostOut: The updated forum post.
+    """
     post = db.query(ForumPost).filter(ForumPost.id == post_id).first()
     if not post:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Post not found")
@@ -82,6 +140,16 @@ def update_forum_post(post_id: int, post_update: ForumPostUpdate, db: Session = 
 # Route to delete a forum post
 @router.delete("/forum/{post_id}", status_code=status.HTTP_204_NO_CONTENT)
 def delete_forum_post(post_id: int, db: Session = Depends(get_db)):
+    """
+    Delete a specific forum post by its ID.
+
+    Args:
+        post_id (int): The ID of the post to delete.
+        db (Session): The database session.
+
+    Returns:
+        dict: A message confirming successful deletion.
+    """
     post = db.query(ForumPost).filter(ForumPost.id == post_id).first()
     if not post:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Post not found")
@@ -93,6 +161,16 @@ def delete_forum_post(post_id: int, db: Session = Depends(get_db)):
 # Route to upvote a forum post
 @router.post("/forum/{post_id}/upvote")
 def upvote_forum_post(post_id: int, db: Session = Depends(get_db)):
+    """
+    Upvote a forum post, increasing its upvote count.
+
+    Args:
+        post_id (int): The ID of the post to upvote.
+        db (Session): The database session.
+
+    Returns:
+        dict: A message confirming the upvote and updated upvote count.
+    """
     post = db.query(ForumPost).filter(ForumPost.id == post_id).first()
     if not post:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Post not found")
@@ -104,6 +182,16 @@ def upvote_forum_post(post_id: int, db: Session = Depends(get_db)):
 # Route to downvote a forum post
 @router.post("/forum/{post_id}/downvote")
 def downvote_forum_post(post_id: int, db: Session = Depends(get_db)):
+    """
+    Downvote a forum post, increasing its downvote count.
+
+    Args:
+        post_id (int): The ID of the post to downvote.
+        db (Session): The database session.
+
+    Returns:
+        dict: A message confirming the downvote and updated downvote count.
+    """
     post = db.query(ForumPost).filter(ForumPost.id == post_id).first()
     if not post:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Post not found")

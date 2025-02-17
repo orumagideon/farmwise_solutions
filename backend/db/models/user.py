@@ -1,5 +1,5 @@
 # db/models/user.py
-from sqlalchemy import Column, Integer, String, DateTime
+from sqlalchemy import Column, Integer, String, DateTime, ForeignKey
 from sqlalchemy.sql import func
 from sqlalchemy.orm import relationship
 from db.base import Base
@@ -15,5 +15,6 @@ class User(Base):
 
     # Relationships
     produce = relationship("Produce", back_populates="user")
-    forum_posts = relationship("ForumPost", back_populates="user")
     equipment = relationship("Equipment", back_populates="user")
+    forum_posts = relationship("ForumPost", back_populates="user")
+    forum_replies = relationship("ForumReply", back_populates="user")

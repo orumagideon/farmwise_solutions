@@ -7,7 +7,7 @@ class Equipment(Base):
     __tablename__ = "equipment"
 
     id = Column(Integer, primary_key=True, index=True)
-    user_id = Column(Integer, ForeignKey("user.id"), nullable=False)
+    user_id = Column(Integer, ForeignKey("users.id"), nullable=False)  # Corrected foreign key
     equipment_name = Column(String, nullable=False)
     description = Column(String)
     lease_price = Column(Float, nullable=False)
