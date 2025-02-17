@@ -1,26 +1,66 @@
 /* src/components/Navbar.css */
 .navbar {
-    background-color: #333;
-    color: white;
-    padding: 10px 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  background-color: #22543D; /* Deep Green for a natural farm vibe */
+  color: white;
+  padding: 15px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  border-bottom: 3px solid #38A169; /* Green accent bottom border */
+}
+
+.navbar-brand a {
+  color: white;
+  text-decoration: none;
+  font-size: 1.8rem;
+  font-weight: bold;
+  transition: color 0.3s ease-in-out;
+}
+
+.navbar-brand a:hover {
+  color: #38A169; /* Highlight hover effect */
+}
+
+.navbar-links {
+  list-style: none;
+  display: flex;
+  gap: 25px;
+}
+
+.navbar-links li {
+  position: relative;
+}
+
+.navbar-links li a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  padding: 5px 10px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.navbar-links li a:hover {
+  background-color: #38A169; /* Smooth hover effect */
+  color: white;
+  border-radius: 5px;
+}
+
+/* Responsive Navbar for smaller screens */
+@media screen and (max-width: 768px) {
+  .navbar {
+      flex-direction: column;
+      align-items: flex-start;
   }
-  
-  .navbar-brand a {
-    color: white;
-    text-decoration: none;
-    font-size: 1.5rem;
-  }
-  
+
   .navbar-links {
-    list-style: none;
-    display: flex;
-    gap: 20px;
+      flex-direction: column;
+      width: 100%;
+      gap: 10px;
   }
-  
+
   .navbar-links li a {
-    color: white;
-    text-decoration: none;
+      width: 100%;
+      padding: 10px 15px;
   }
+}

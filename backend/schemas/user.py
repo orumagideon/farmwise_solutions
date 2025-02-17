@@ -1,6 +1,6 @@
+# schemas/user.py
 from pydantic import BaseModel, EmailStr
 from datetime import datetime
-from typing import Optional
 
 # Schema for user registration
 class UserCreate(BaseModel):
@@ -21,4 +21,4 @@ class UserOut(BaseModel):
     created_at: datetime
 
     class Config:
-        from_attributes = True  # Enables ORM mode (previously `orm_mode = True`)
+        from_attributes = True  # Enables ORM mode

@@ -5,6 +5,8 @@ from sqlalchemy.orm import relationship
 from db.base import Base
 
 class User(Base):
+    __tablename__ = "users"  # Explicitly define the table name
+
     id = Column(Integer, primary_key=True, index=True)
     username = Column(String, unique=True, nullable=False)
     email = Column(String, unique=True, nullable=False)

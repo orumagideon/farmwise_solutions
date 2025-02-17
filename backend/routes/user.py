@@ -6,7 +6,7 @@ from db.models.user import User
 from schemas.user import UserCreate, UserOut, UserLogin
 from core.security import get_password_hash, verify_password, create_access_token
 
-router = APIRouter(prefix="/api")  # Add prefix here
+router = APIRouter(prefix="/api/users", tags=["Users"])  # Prefix added
 
 # Dependency to get the database session
 def get_db():

@@ -1,20 +1,58 @@
 /* src/components/ProduceList.css */
+
 .produce-list {
-    margin-top: 20px;
-  }
-  
-  .produce-item {
-    background-color: white;
-    padding: 15px;
-    margin-bottom: 10px;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
-  
-  .produce-item h3 {
-    margin: 0;
-  }
-  
-  .produce-item p {
-    margin: 5px 0;
-  }
+  margin-top: 30px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  padding: 10px;
+}
+
+.produce-item {
+  background-color: #f0fff4; /* Light green farm-friendly background */
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: left;
+}
+
+.produce-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Hover effect */
+}
+
+.produce-item h3 {
+  margin: 0;
+  color: #2f855a; /* Dark green for headings */
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.produce-item p {
+  margin: 8px 0;
+  color: #4a5568; /* Subtle gray for descriptions */
+  font-size: 1rem;
+}
+
+.produce-item span {
+  color: #38a169;
+  font-weight: bold;
+}
+
+.produce-item button {
+  background-color: #38a169;
+  color: white;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.produce-item button:hover {
+  background-color: #2f855a;
+}

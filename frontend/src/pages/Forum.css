@@ -1,12 +1,51 @@
 /* src/pages/Forum.css */
+
 .forum-page {
-    padding: 20px;
+  padding: 40px 20px;
+  background-color: #FAF3DD; /* Light beige for a welcoming forum vibe */
+  min-height: 100vh;
+}
+
+.forum-post {
+  background-color: #FFFFFF; /* Clean white background for posts */
+  margin-bottom: 20px;
+  padding: 20px;
+  border-radius: 12px; /* Softer, more modern corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for better structure */
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.forum-post:hover {
+  transform: translateY(-4px); /* Hover lift effect */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Enhanced shadow on hover */
+}
+
+.forum-post h3 {
+  margin: 0;
+  font-size: 1.8rem;
+  color: #22543D; /* Deep green for post titles */
+  font-weight: bold;
+}
+
+.forum-post p {
+  margin-top: 10px;
+  color: #4A5568; /* Neutral grey for content */
+  line-height: 1.6;
+}
+
+/* Divider between posts */
+.forum-post + .forum-post {
+  border-top: 2px solid #E2E8F0;
+  padding-top: 20px;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+  .forum-page {
+      padding: 20px 10px;
   }
-  
+
   .forum-post {
-    background-color: #f0f0f0;
-    margin-bottom: 10px;
-    padding: 15px;
-    border-radius: 8px;
+      padding: 15px;
   }
-  
+}

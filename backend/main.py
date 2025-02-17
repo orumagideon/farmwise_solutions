@@ -21,22 +21,22 @@ def start_application():
     app.add_middleware(
         CORSMiddleware,
         allow_origins=["http://localhost:3000"],  # Allow frontend origin
-        allow_credentials=True,
+        allow_credentials=True, 
         allow_methods=["*"],  # Allow all methods
         allow_headers=["*"],  # Allow all headers
-    )
+    ) 
     
-    create_tables()
+    create_tables()  # Ensure tables are created when the app starts
     return app
 
 # Create the FastAPI app
 app = start_application()
 
-# Include routers
-app.include_router(user_router)  # No need for prefix here since it's already in the router
-app.include_router(produce_router, prefix="/api")
-app.include_router(forum_router, prefix="/api")
-app.include_router(equipment_router, prefix="/api")
+# Include routers with appropriate prefixes
+app.include_router(user_router)  # No need for prefix here since it's already defined in the router
+app.include_router(produce_router, prefix="/api/produce")
+app.include_router(forum_router, prefix="/api/forum")
+app.include_router(equipment_router, prefix="/api/equipment")
 
 # Route for the home page
 @app.get("/")
